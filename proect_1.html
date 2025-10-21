@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании | ALIANCE PRODUCTION</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* === МОБИЛЬНАЯ ШАПКА И МЕНЮ === */
+        .mobile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .burger {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .burger svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mobile-logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        .mobile-phone {
+            background: #007bff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-phone svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+
+        /* === Мобильное меню — выезжает сверху === */
+        .mobile-menu {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            transition: top 0.4s ease;
+            z-index: 1002;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .mobile-menu.active {
+            top: 0;
+        }
+
+        .mobile-menu-top {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            z-index: 1003;
+        }
+
+        .mobile-menu-top .close-menu {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            padding: 0;
+        }
+
+        .mobile-menu-logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1004;
+        }
+
+        .mobile-menu-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .mobile-menu-phone {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #007bff;
+            border-radius: 6px;
+            text-decoration: none;
+            z-index: 1003;
+        }
+
+        .menu-phone-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .mobile-menu-body {
+            padding: 16px;
+            padding-top: 18px;
+        }
+
+        .mobile-menu-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu-body li {
+            margin-bottom: 12px;
+        }
+
+        .mobile-menu-body a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .menu-contacts {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .menu-contacts p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .menu-contacts .phone-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1001;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* === ДЕСКТОПНАЯ ШАПКА === */
+        .desktop-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            padding: 0 30px;
+            height: 70px;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            transition: background-color 0.3s;
+            box-shadow: none;
+        }
+
+        .desktop-header.scrolled {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .desktop-nav a, .desktop-contacts .phone {
+            color: #000000;
+            transition: color 0.3s;
+        }
+
+        .desktop-nav a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .desktop-nav a:hover {
+            color: #2e9cff;
+        }
+
+        .desktop-contacts {
+            display: flex;
+            align-items: center;
+        }
+
+        .desktop-contacts .phone {
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 20px;
+        }
+
+        .desktop-btn {
+            background: #2e9cff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .desktop-btn:hover {
+            background: #007bff;
+        }
+
+        .desktop-logo img {
+            height: 30px;
+            width: auto;
+        }
+
+        /* === О КОМПАНИИ === */
+        .about-us-section {
+            padding-top: 90px;
+            background: #f8f8f8;
+        }
+
+        .about-us-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-header h1 {
+            font-size: 38px;
+            font-weight: 300;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-header h1::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #007bff;
+            margin-top: 10px;
+        }
+
+        .content-main-about {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            gap: 30px;
+        }
+
+        .text-content-about {
+            flex: 1;
+        }
+
+        .text-content-about h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .text-content-about p {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .image-container {
+            flex-shrink: 0;
+            width: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* === ГОРИЗОНТАЛЬНАЯ СЕТКА (FEATURES) === */
+        .features-carousel-container {
+            margin: 30px 0;
+            padding: 0 0 20px 0;
+        }
+
+        .features-row-about {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding: 0 20px;
+            scroll-behavior: smooth;
+        }
+
+        .features-row-about::-webkit-scrollbar {
+            display: none;
+        }
+
+        .feature-item-about {
+            flex: 0 0 250px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            scroll-snap-align: start;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-item-about i {
+            font-size: 32px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .feature-item-about div {
+            font-weight: 600;
+        }
+
+        .features-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .features-nav button {
+            background: #007bff;
+            color: #fff;
+            border: 0;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .features-nav button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* === АДАПТИВНОСТЬ === */
+        @media (min-width: 901px) {
+            .mobile-header,
+            .mobile-menu,
+            .overlay {
+                display: none !important;
+            }
+
+            .desktop-header {
+                display: flex;
+            }
+
+            .features-row-about {
+                overflow-x: visible;
+                gap: 24px;
+                padding: 0 50px;
+                justify-content: center;
+            }
+
+            .feature-item-about {
+                flex: 1;
+                min-width: 0;
+                border-radius: 6px;
+            }
+
+            .features-nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .desktop-header {
+                display: none;
+            }
+
+            .mobile-header {
+                display: flex;
+            }
+
+            .feature-item-about {
+                flex: 0 0 calc(100vw - 60px);
+                min-height: 140px;
+                padding: 18px;
+                border-radius: 10px;
+            }
+
+            .features-row-about {
+                padding: 0 10px;
+            }
+
+            .features-nav button {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+
+        /* === БАЗОВЫЕ СТИЛИ === */
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+        .logo-img { height: 30px; width: auto; object-fit: contain; }
+
+        /* === Остальные секции === */
+        .content-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-title {
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: 25px;
+            color: #333;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .aerosol-section {
+            padding: 80px 20px;
+            background: #ffffff00;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .aerosol-content-wrapper {
+            display: flex;
+            gap: 40px;
+        }
+
+        .aerosol-text-block {
+            flex: 1;
+        }
+
+        .aerosol-title {
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 40px;
+            padding-top: 10px;
+            color: #333;
+        }
+
+        .aerosol-title::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: #2e9cff;
+            margin-bottom: 10px;
+        }
+
+        .aerosol-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px 30px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .aerosol-category-item {
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .aerosol-category-item i {
+            color: #2e9cff;
+            font-size: 18px;
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .aerosol-logos-block {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1px;
+            border: 1px solid #e0e0e011;
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e0e0e063;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .logo-item img {
+            max-width: 100px;
+            max-height: 50px;
+            width: auto;
+            height: auto;
+            opacity: 0.2;
+            transition: opacity 0.3s;
+            filter: grayscale(100%);
+        }
+
+        .logo-item:nth-child(2) img {
+            opacity: 1;
+            filter: none;
+        }
+
+        .form-section {
+            background: #f5f5f5;
+            padding: 80px 20px;
+        }
+
+        .form-content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: stretch;
+            gap: 40px;
+        }
+
+        .form-image-block {
+            width: 50%;
+            height: 100%;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .form-image-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .form-container {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group i {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2e9cff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .confidentiality-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer {
+            background: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            color: #333;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #2e9cff;
+        }
+
+        .footer-section a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #007bff;
+        }
+
+        @media (max-width: 900px) {
+            .about-section {
+                flex-direction: column;
+            }
+
+            .about-title {
+                text-align: center;
+                font-size: 28px;
+            }
+
+            .form-content-wrapper {
+                flex-direction: column;
+            }
+
+            .form-image-block {
+                width: 100%;
+                min-height: 250px;
+                order: 1;
+            }
+
+            .form-container {
+                order: 2;
+                padding: 20px;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-group input {
+                width: 100%;
+            }
+
+            .aerosol-section {
+                padding: 40px 20px;
+            }
+
+            .aerosol-content-wrapper {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .aerosol-title {
+                font-size: 24px;
+                margin-bottom: 25px;
+                text-align: left;
+            }
+
+            .aerosol-title::before {
+                margin: 0 0 10px 0;
+            }
+
+            .aerosol-categories {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px 10px;
+            }
+
+            .aerosol-logos-block {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                border: none;
+                gap: 0;
+            }
+
+            .logo-item {
+                border: 1px solid #e0e0e0;
+                padding: 10px;
+                height: 80px;
+            }
+
+            .logo-item img {
+                max-width: 80px;
+                max-height: 40px;
+            }
+
+            .logo-item:nth-child(9) {
+                display: none;
+            }
+
+            .footer-content {
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 901px) {
+            .about-section {
+                flex-direction: row;
+            }
+
+            .form-content-wrapper {
+                flex-direction: row;
+            }
+
+            .form-image-block {
+                order: 1;
+            }
+
+            .form-container {
+                order: 2;
+            }
+
+            .aerosol-logos-block {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">
+        <button class="burger" aria-label="Меню" id="burgerBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+        <a href="index.html" class="mobile-logo">
+            <img src="Aliance1.png" alt="ALIANCE PRODUCTION" class="logo-img">
+        </a>
+        <button class="mobile-phone" aria-label="Позвонить">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M22 16.92v3.58a2 2 0 0 1-2.18 2 19.72 19.72 0 0 1-8.63-3.13 19.5 19.5 0 0 1-6-6A19.72 19.72 0 0 1 2.5 4.18 2 2 0 0 1 4.5 2h3.58a2 2 0 0 1 2 1.72c.12 1.05.36 2.08.72 3.06a2 2 0 0 1-.45 2.11L9.7 10.7a16 16 0 0 0 6 6l1.81-1.45a2 2 0 0 1 2.11-.45c.98.36 2.01.6 3.06.72A2 2 0 0 1 22 16.92z" fill="white"/>
+            </svg>
+        </button>
+    </div>
+
+    <header class="desktop-header">
+        <a href="index.html" class="desktop-logo">
+            <img src="Aliance1.png" alt="ALIANCE PRODUCTION" class="logo-img">
+        </a>
+        <nav class="desktop-nav">
+            <a href="proect_1.html">О компании</a>
+            <a href="proect_2.html">Контрактное производство</a>
+            <a href="proect_3.html">Собственные марки</a>
+            <a href="proect_4.html">Новости</a>
+            <a href="proect_5.html">Контакты</a>
+        </nav>
+        <div class="desktop-contacts">
+            <span class="phone">+7 (499) 686-10-14</span>
+            <a href="#contacts" class="desktop-btn">Получить консультацию</a>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-top">
+            <button class="close-menu" id="closeMenu" aria-label="Закрыть меню">✕</button>
+            <a href="index.html" class="mobile-menu-logo" aria-label="Главная">
+                <img src="Aliance1.png" alt="Logo">
+            </a>
+            <a href="tel:+74996861014" class="mobile-menu-phone" aria-label="Позвонить">
+                <svg viewBox="0 0 24 24" fill="none" class="menu-phone-icon" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 16.92v3.58a2 2 0 0 1-2.18 2 19.72 19.72 0 0 1-8.63-3.13 19.5 19.5 0 0 1-6-6A19.72 19.72 0 0 1 2.5 4.18 2 2 0 0 1 4.5 2h3.58a2 2 0 0 1 2 1.72c.12 1.05.36 2.08.72 3.06a2 2 0 0 1-.45 2.11L9.7 10.7a16 16 0 0 0 6 6l1.81-1.45a2 2 0 0 1 2.11-.45c.98.36 2.01.6 3.06.72A2 2 0 0 1 22 16.92z" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+        <div class="mobile-menu-body">
+            <ul>
+                <li><a href="proect_1.html">О компании</a></li>
+                <li><a href="proect_2.html">Контрактное производство</a></li>
+                <li><a href="proect_3.html">Собственные марки</a></li>
+                <li><a href="proect_4.html">Новости</a></li>
+                <li><a href="proect_5.html">Контакты</a></li>
+            </ul>
+            <div class="menu-contacts">
+                <p class="phone-number">+7 (499) 686-10-14</p>
+                <p class="address">г. Москва, Холодильный пер. 4к1с8</p>
+                <p><a href="mailto:a.dragunov@tdaliance.ru" style="color:#1152cc;text-decoration:none;">a.dragunov@tdaliance.ru</a></p>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-us-section" id="about-us-main">
+        <div class="about-us-wrapper">
+            <div class="section-header">
+                <h1>О КОМПАНИИ</h1>
+            </div>
+            <div class="content-main-about">
+                <div class="image-container">
+                    <img src="about.png" alt="Производство">
+                </div>
+                <div class="text-content-about">
+                    <h2>МЫ — ЭКСПЕРТЫ В ПРОИЗВОДСТВЕ ХИМИИ</h2>
+                    <p>Компания ALIANCE PRODUCTION — лидер по производству бытовой и профессиональной химии в России. 
+                    Мы создаём инновационные рецептуры, предоставляем полный цикл контрактного производства и гарантируем качество на каждом этапе.</p>
+                </div>
+            </div>
+            <div class="features-carousel-container">
+                <div class="features-row-about" id="featuresRow">
+                    <div class="feature-item-about"><i class="fas fa-clock"></i><div>Работаем с 2017 года</div></div>
+                    <div class="feature-item-about"><i class="fas fa-certificate"></i><div>Сертифицированная продукция</div></div>
+                    <div class="feature-item-about"><i class="fas fa-check-circle"></i><div>Контроль качества</div></div>
+                    <div class="feature-item-about"><i class="fas fa-truck-loading"></i><div>Поставки по России</div></div>
+                    <div class="feature-item-about"><i class="fas fa-tachometer-alt"></i><div>Быстрое производство</div></div>
+                </div>
+                <div class="features-nav">
+                    <button id="scrollLeft"><i class="fas fa-chevron-left"></i></button>
+                    <button id="scrollRight"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    
+    <section class="production-section">
+    <div class="production-wrapper">
+        <div class="production-content">
+            <div class="production-text">
+                <h2 class="production-title">НАШЕ ПРОИЗВОДСТВО</h2>
+                <p>Предварительные выводы неутешительны: разбавленное изрядной долей эмпатии, рациональное мышление обеспечивает широкому кругу специалистов участие в формировании глубоких рассуждений. Но граница обучения кадров создаёт необходимость включения в производственный план целого ряда внеочередных мероприятий с учётом комплекса кластеризации усилий.</p>
+                <p>Реализация намеченных плановых заданий, а также свежий взгляд на привычные вещи — безусловно открывает новые горизонты для соответствующих условий активизации. Предварительные выводы неутешительны: экономическая повестка сегодняшнего дня требует анализа существующих паттернов поведения.</p>
+
+                <div class="production-icons">
+                    <div><i class="fas fa-car"></i> Автомобильная химия</div>
+                    <div><i class="fas fa-home"></i> Бытовая химия</div>
+                    <div><i class="fas fa-shield-virus"></i> Дезинфицирующие средства</div>
+                    <div><i class="fas fa-utensils"></i> Пищевые аэрозоли</div>
+                    <div><i class="fas fa-spa"></i> Косметическая продукция</div>
+                    <div><i class="fas fa-spray-can"></i> Краски аэрозольные</div>
+                </div>
+            </div>
+
+            <div class="production-image">
+                <img src="90.png" alt="Наше производство">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .production-section {
+        background: #f8f8f8;
+        padding: 80px 20px;
+    }
+
+    .production-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .production-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    .production-text {
+        flex: 1 1 55%;
+        color: #333;
+    }
+
+    .production-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        color: #111;
+    }
+
+    .production-text p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+    }
+
+    .production-icons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 30px;
+        margin-top: 25px;
+    }
+
+    .production-icons div {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .production-icons i {
+        font-size: 20px;
+        color: #007bff;
+        margin-right: 10px;
+        width: 24px;
+        text-align: center;
+    }
+
+    .production-image {
+        flex: 1 1 40%;
+        text-align: right;
+    }
+
+    .production-image img {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 900px) {
+        .production-content {
+            flex-direction: column-reverse;
+            text-align: center;
+        }
+
+        .production-text {
+            flex: 1 1 100%;
+        }
+
+        .production-icons {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .production-image {
+            flex: 1 1 100%;
+            text-align: center;
+        }
+
+        .production-image img {
+            max-width: 100%;
+        }
+    }
+</style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <section class="content-section" id="about">
+        <div class="about-section">
+            <div class="about-image">
+                <img src="Alian.png" alt="О компании">
+            </div>
+            <div class="about-content">
+                <h2 class="about-title">ОТНОШЕНИЕ К ДЕЛУ И <br> К КЛИЕНТАМ</h2>
+                <p>Наше отношение к работе и клиентам — ключевой фактор успеха. Мы нацелены на долгосрочное сотрудничество и предоставляем высококачественный сервис, который превосходит ожидания. Каждый проект для нас — это возможность доказать свой профессионализм.</p>
+                <p>Мы используем только проверенные и сертифицированные компоненты, обеспечивая полную безопасность и эффективность нашей продукции. Наш собственный научно-исследовательский центр позволяет нам постоянно разрабатывать новые, инновационные решения и адаптировать их под конкретные нужды рынка.</p>
+                <p>Сотрудничая с нами, вы получаете надежного партнера, который берет на себя все заботы, связанные с производством, позволяя вам сосредоточиться на развитии своего бренда и маркетинге.</p>
+            </div>
+        </div>
+    </section>
+
+
+<section class="research-section">
+    <div class="research-wrapper">
+        <h2 class="research-title">
+            ИССЛЕДОВАТЕЛЬСКИЙ ЦЕНТР<br>ALIANCE PRODUCTION
+        </h2>
+
+        <div class="research-text-block">
+            <p>Явные признаки победы институционализации рассмотрены исключительно в разрезе маркетинговых и финансовых предпосылок. Приятно, граждане, наблюдать, как активно развивающиеся страны третьего мира могут быть ограничены исключительно образом мышления.</p>
+            <p>С учётом сложившейся международной обстановки, синтетическое тестирование требует определения и уточнения анализа существующих паттернов поведения. Не следует, однако, забывать, что высокотехнологичная концепция общественного уклада представляет собой интересный эксперимент проверки как самодостаточных, так и внешне зависимых решений.</p>
+        </div>
+
+        <div class="research-carousel-container">
+            <div class="research-row" id="researchRow">
+                <div class="research-item"><img src="70.png" alt="Лаборатория 1"></div>
+                <div class="research-item"><img src="100.png" alt="Промышленный объект"></div>
+                <div class="research-item"><img src="70.png" alt="Лаборатория 2"></div>
+                <div class="research-item"><img src="100.png" alt="Производство"></div>
+            </div>
+
+            <div class="research-nav">
+                <button id="scrollResearchLeft"><i class="fas fa-chevron-left"></i></button>
+                <button id="scrollResearchRight"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .research-section {
+        padding: 80px 20px;
+        background: #fff;
+    }
+
+    .research-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .research-title {
+        font-size: 32px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #333;
+        margin-bottom: 30px;
+        line-height: 1.3;
+    }
+
+    .research-text-block {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .research-text-block p {
+        flex: 1 1 48%;
+        font-size: 16px;
+        line-height: 1.7;
+        color: #444;
+    }
+
+    /* === ГОРИЗОНТАЛЬНАЯ СЕТКА === */
+    .research-carousel-container {
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .research-row {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 10px;
+    }
+
+    .research-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .research-item {
+        flex: 0 0 350px;
+        scroll-snap-align: start;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        background: #fff;
+    }
+
+    .research-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .research-nav {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .research-nav button {
+        background: #007bff;
+        color: #fff;
+        border: 0;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .research-nav button:hover {
+        background: #005dc1;
+    }
+
+    .research-nav button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    @media (max-width: 900px) {
+        .research-text-block {
+            flex-direction: column;
+        }
+        .research-text-block p {
+            flex: 1 1 100%;
+        }
+        .research-item {
+            flex: 0 0 calc(100vw - 60px);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const row = document.getElementById('researchRow');
+        const leftBtn = document.getElementById('scrollResearchLeft');
+        const rightBtn = document.getElementById('scrollResearchRight');
+
+        if (row && leftBtn && rightBtn) {
+            function getScrollDistance() {
+                const firstCard = row.querySelector(':scope > div');
+                return firstCard ? firstCard.offsetWidth + 20 : 0;
+            }
+
+            function updateButtons() {
+                leftBtn.disabled = row.scrollLeft <= 0;
+                rightBtn.disabled = row.scrollLeft >= (row.scrollWidth - row.clientWidth - 1);
+            }
+
+            leftBtn.addEventListener('click', () => {
+                row.scrollBy({ left: -getScrollDistance(), behavior: 'smooth' });
+            });
+
+            rightBtn.addEventListener('click', () => {
+                row.scrollBy({ left: getScrollDistance(), behavior: 'smooth' });
+            });
+
+            row.addEventListener('scroll', updateButtons);
+            window.addEventListener('resize', updateButtons);
+            updateButtons();
+        }
+    });
+</script>
+
+
+
+    <section class="aerosol-section">
+        <div class="aerosol-content-wrapper">
+            <div class="aerosol-text-block">
+                <h2 class="aerosol-title">
+                    ПРОИЗВОДИМ АЭРОЗОЛЬНУЮ<br>
+                    ПРОДУКЦИЮ ДЛЯ РАЗНЫХ СФЕР
+                </h2>
+                <ul class="aerosol-categories">
+                    <li class="aerosol-category-item"><i class="fas fa-flask"></i> Химические производства</li>
+                    <li class="aerosol-category-item"><i class="fas fa-car-side"></i> Автомобильная косметика</li>
+                    <li class="aerosol-category-item"><i class="fas fa-car-wash"></i> Автомойки</li>
+                    <li class="aerosol-category-item"><i class="fas fa-tshirt"></i> Косметика по уходу за одеждой</li>
+                    <li class="aerosol-category-item"><i class="fas fa-utensils"></i> Пищевая продукция</li>
+                    <li class="aerosol-category-item"><i class="fas fa-shoe-prints"></i> Косметика по уходу за обувью</li>
+                    <li class="aerosol-category-item"><i class="fas fa-paint-roller"></i> Лаки и краски</li>
+                    <li class="aerosol-category-item"><i class="fas fa-tools"></i> Строительные материалы</li>
+                    <li class="aerosol-category-item"><i class="fas fa-spa"></i> Косметические средства</li>
+                    <li class="aerosol-category-item"><i class="fas fa-ellipsis-h"></i> И многих других</li>
+                </ul>
+            </div>
+            <div class="aerosol-logos-block">
+                <div class="logo-item"><img src="4.png" alt="Клиент 1"></div>
+                <div class="logo-item"><img src="05.png" alt="Клиент 2 (Цветной)"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 3"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 4"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 5"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 6"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 7"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 8"></div>
+                <div class="logo-item"><img src="4.png" alt="Клиент 9"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section" id="contacts">
+    <center><h2 class="aerosol-title">ХОТИТЕ СОТРУДНИЧАТЬ?</h2></center>               
+        <p style="text-align: center; margin-bottom: 40px; color: #666;">Наш специалист свяжется с вами в течение 10 минут</p>
+        <div class="form-content-wrapper">
+            <div class="form-image-block">
+                <img src="AG  10.png" alt="Контактное лицо">
+            </div>
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-phone-alt"></i>
+                        <input type="tel" placeholder="Номер телефона" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="E-mail">
+                    </div>
+                    <button type="submit" class="submit-btn">Получить консультацию</button>
+                    <div class="confidentiality-text">
+                        <i class="fas fa-lock"></i>
+                        <span>Нажимая кнопку, вы соглашаетесь на обработку персональных данных</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <a href="#">
+                    <img src="Aliance1.png" alt="ALIANCE PRODUCTION" style="height: 30px; margin-bottom: 20px;">
+                </a>
+                <p>Контрактное производство бытовой химии и косметики. Полный цикл услуг от разработки до логистики.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Информация</h3>
+                <p><a href="#about">О компании</a></p>
+                <p><a href="#production">Контрактное производство</a></p>
+                <p><a href="#brands">Собственные марки</a></p>
+                <p><a href="#news">Новости</a></p>
+                <p><a href="#contacts">Контакты</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>+7 (499) 686-10-14</p>
+                <p>a.dragunov@tdaliance.ru</p>
+                <p>г. Москва, Холодильный пер. 4к1с8</p>
+            </div>
+        </div>
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #666;">
+            © 2023 ALIANCE PRODUCTION. Все права защищены.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerBtn = document.getElementById('burgerBtn');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            const menuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+            }
+
+            burgerBtn.addEventListener('click', toggleMenu);
+            closeMenu.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('active')) {
+                        toggleMenu();
+                    }
+                });
+            });
+
+            function setupCarousel(listId, leftBtnId, rightBtnId) {
+                const list = document.getElementById(listId);
+                const leftBtn = document.getElementById(leftBtnId);
+                const rightBtn = document.getElementById(rightBtnId);
+
+                if (!list || !leftBtn || !rightBtn) return;
+
+                function getScrollDistance() {
+                    const firstCard = list.querySelector(':scope > div');
+                    return firstCard ? firstCard.offsetWidth + 15 : 0; // gap=15
+                }
+
+                function updateButtons() {
+                    leftBtn.disabled = list.scrollLeft <= 0;
+                    rightBtn.disabled = list.scrollLeft >= (list.scrollWidth - list.clientWidth - 1);
+                }
+
+                leftBtn.addEventListener('click', () => {
+                    list.scrollBy({ left: -getScrollDistance(), behavior: 'smooth' });
+                });
+
+                rightBtn.addEventListener('click', () => {
+                    list.scrollBy({ left: getScrollDistance(), behavior: 'smooth' });
+                });
+
+                list.addEventListener('scroll', updateButtons);
+                window.addEventListener('resize', updateButtons);
+                updateButtons();
+            }
+
+            setupCarousel('featuresRow', 'scrollLeft', 'scrollRight');
+
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.desktop-header');
+                if (window.scrollY > 0) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
